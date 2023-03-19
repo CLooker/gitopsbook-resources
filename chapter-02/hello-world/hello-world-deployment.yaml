@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+        - name: hello-world
+          image: node:latest
+          command: [node]
+          args: [/opt/app/hello-world]
+          env:
+            - name: HELLO_WORLD_MESSAGE
+              value: Hello, world!
+          volumeMounts:
+            - name: hello-world
+              mountPath: /opt/app/hello-world.js
+              subPath: hello-world.js
+      volumes:
+        - name: hello-world
+          configMap:
+            name: hello-world

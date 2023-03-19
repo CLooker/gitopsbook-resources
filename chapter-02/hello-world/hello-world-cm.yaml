@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-world
+data:
+  hello-world.js: |
+    setInterval(
+      () => console.log(process.env.HELLO_WORLD_MESSAGE || "Hello, world!"),
+      5000
+    );
